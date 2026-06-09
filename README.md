@@ -1,16 +1,11 @@
-# ipfs-check Web Interface
+# ipfs-check-frontend
 
-This directory contains the static web assets for ipfs-check.
+A fork of the [`web/`](https://github.com/ipfs/ipfs-check/tree/main/web) folder from [ipfs/ipfs-check](https://github.com/ipfs/ipfs-check), extracted with full commit history.
 
-## Deployment
+## Licensing
 
-`./web` is automatically deployed to https://check.ipfs.network via GitHub Pages.
-
-Backend updates require manual deployment via `ipshipyard/waterworks-infra` ([example](https://github.com/ipshipyard/waterworks-infra/pull/740)).
-
-## Architecture
-
-The files in this directory are embedded directly into the Go binary and served as-is. No build step is required for normal deployment since the compiled CSS (`output.css`) is already committed to the repository.
+- This repository is licensed under the [MIT License](LICENSE) — Copyright (c) 2026 Hammer Technologies LLC
+- The original upstream code is dual-licensed under Apache-2.0 OR MIT — see [ORIGINAL_LICENSE.md](ORIGINAL_LICENSE.md)
 
 ## Development
 
