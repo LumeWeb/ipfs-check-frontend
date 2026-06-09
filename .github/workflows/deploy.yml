@@ -1,0 +1,40 @@
+name: Build and deploy dist
+
+on:
+  push:
+    branches: [develop]
+    paths-ignore:
+      - 'dist/**'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build Tailwind CSS
+        run: npx tailwindcss -i ./input.css -o ./dist/output.css --minify
+
+      - name: Copy static files to dist
+        run: |
+          cp index.html script.js favicon.ico dist/
+          cp -r fonts dist/
+
+      - name: Commit and push dist
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f dist/
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "deploy: rebuild dist"
+          git push
